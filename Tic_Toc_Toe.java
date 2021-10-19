@@ -11,7 +11,6 @@ public class Tic_Toc_Toe {
 		chooseLetter();
 		showBoard();
 		play();
-		showBoard();
 	}
 	public static void board() 
 	{		                                    // creating board to play  
@@ -48,17 +47,36 @@ public class Tic_Toc_Toe {
 		System.out.println(" "+board[7]+" |"+" "+board[8]+" |"+" "+board[9]);
 
 	}
-	public static void play() {
-	System.out.println("Enter the place from 1 to 9 for your next move ");
-	int place = sc.nextInt();
-	if(place < 10 && place > 0 ) {
-        if(board[place] == ' ') {
-        	board[place] = Player_letter;
-        }
-        else
-        	System.out.println(" this place is already occupied ! please select another ");
+	public static int is_Empty() {
+		int count = 0;
+		for(int i=1 ; i <= 9 ; i++ ) {
+			if(board[i] == ' ' ) {
+				count ++;
+			}
+		}
+		return count ;
+		}
+	public static void play() { // playing the next move 
+		boolean check = true;
+		while(check) {
+		int count = is_Empty();
+		if(count > 0 ) {
+		System.out.println("Enter the place from 1 to 9 for your next move ");
+		int place = sc.nextInt();
+		if(place < 10 && place > 0 ) {
+			if(board[place] == ' ') {
+				board[place] = Player_letter;
+			}
+			else
+				System.out.println(" this place is already occupied ! please select another ");
+		}
+		else
+			System.out.println("wrong place entered ! please select nos between 1 to 9 only ");
 	}
-	else
-		System.out.println("wrong place entered ! please select nos between 1 to 9 only ");
-	}
+		else {
+			System.out.println("all 9 places are occupied !");
+		check = false;}
+		showBoard();
+		}
+}
 }
