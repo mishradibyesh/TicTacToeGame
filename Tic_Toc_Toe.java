@@ -8,6 +8,7 @@ public class Tic_Toc_Toe {
 		System.out.println("welcome to Tic Tac Toi GAME") ;
 		board() ; //calling the method board in main method	
 		chooseLetter();
+		showBoard();
 	}
 	public static void board() 
 	{
@@ -36,6 +37,15 @@ public class Tic_Toc_Toe {
 		}
 		System.out.println("player letter is "+Player_letter);
 		System.out.println("computer letter is "+Computer_letter);
+	}
+
+	public static void showBoard() {                                                    // showing board status 
+		System.out.println(" "+board[1]+" |"+" "+board[2]+" |"+" "+board[3]);
+		System.out.println("-----------");
+		System.out.println(" "+board[4]+" |"+" "+board[5]+" |"+" "+board[6]);
+		System.out.println("-----------");
+		System.out.println(" "+board[7]+" |"+" "+board[8]+" |"+" "+board[9]);
+
 	}
 
 }
