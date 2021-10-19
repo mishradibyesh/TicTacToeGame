@@ -1,16 +1,26 @@
 package com.bl.tictoctoe.game;
+import java.util.Random;
 import java.util.Scanner;
 public class Tic_Toc_Toe {
 	static char[] board =new char[10];
 	static char Player_letter;
 	static char Computer_letter;
+	static int count;
 	static Scanner sc = new Scanner(System.in);
+	static Random rm = new Random();
 	public static void main(String[] args) {
 		System.out.println("welcome to Tic Tac Toi GAME") ;
 		board() ; //calling the method board in main method	
 		chooseLetter();
-		showBoard();
-		play();
+		int toss = rm.nextInt(2)+1;
+		if(toss == 1) {
+			System.out.println("player won the toss ! player will play first ");
+			playerTurn();
+		}
+		else {
+			System.out.println("Computer won the toss ! computer will play first ");
+			computerTurn();
+		}
 	}
 	public static void board() 
 	{		                                    // creating board to play  
@@ -55,28 +65,55 @@ public class Tic_Toc_Toe {
 			}
 		}
 		return count ;
-		}
-	public static void play() { // playing the next move 
+	}
+	public static void playerTurn() { // playing the next move 
+		showBoard();
 		boolean check = true;
 		while(check) {
-		int count = is_Empty();
-		if(count > 0 ) {
-		System.out.println("Enter the place from 1 to 9 for your next move ");
-		int place = sc.nextInt();
-		if(place < 10 && place > 0 ) {
-			if(board[place] == ' ') {
-				board[place] = Player_letter;
+			count = is_Empty();
+			if(count > 0 ) {
+				System.out.println("Enter the place from 1 to 9 for your next move ");
+				int place = sc.nextInt();
+				if(place < 10 && place > 0 ) {
+					if(board[place] == ' ') {
+						board[place] = Player_letter;
+						computerTurn();
+						check = false;
+					}
+					else
+						System.out.println(" this place is already occupied ! please select another ");
+				}
+				else
+					System.out.println("wrong place entered ! please select nos between 1 to 9 only ");
 			}
-			else
-				System.out.println(" this place is already occupied ! please select another ");
+			else {
+				System.out.println("all 9 places are occupied !");
+				check = false;
+			}
 		}
-		else
-			System.out.println("wrong place entered ! please select nos between 1 to 9 only ");
+
 	}
-		else {
-			System.out.println("all 9 places are occupied !");
-		check = false;}
-		showBoard();
+	public static void computerTurn() {
+		boolean check = true;
+		while(check) {
+			count = is_Empty();
+			if(count > 0 ) {
+				int place = rm.nextInt(9)+1;
+				if(board[place] == ' ') {
+					board[place] = Computer_letter ;
+					playerTurn();
+					check = false;
+				}
+				else {
+					computerTurn();
+				}
+
+			}
+			else {
+				System.out.println("all 9 places are occupied !");
+				check = false;
+			}
 		}
-}
+
+	}
 }
